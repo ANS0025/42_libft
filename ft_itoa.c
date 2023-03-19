@@ -35,7 +35,7 @@ char	*ft_itoa(int n)
 
 	num = n;
 	digits = get_digits(n);
-	if (n < 0)
+	if (n <= 0)
 	{
 		num *= -1;
 		digits++;
