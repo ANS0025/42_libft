@@ -22,16 +22,15 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (!s1 || !set)
 		return (NULL);
 	start = 0;
-	end = ft_strlen(s1) - 1;
 	while (s1[start] && ft_strchr(set, s1[start]))
 		start++;
+	end = ft_strlen(s1) - 1;
 	while (end > start && ft_strchr(set, s1[end]))
 		end--;
 	len = end - start + 1;
 	trimmed_str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!trimmed_str)
 		return (NULL);
-	ft_strlcpy(trimmed_str, s1 + start, len);
-	trimmed_str[len] = '\0';
+	ft_strlcpy(trimmed_str, s1 + start, len + 1);
 	return (trimmed_str);
 }

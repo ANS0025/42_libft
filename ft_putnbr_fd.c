@@ -10,21 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {
+	int		flag;
 	char	c;
 
+	flag = 1;
 	if (n < 0)
 	{
 		write(fd, "-", 1);
-		n = -n;
+		flag = -1;
 	}
-	if (n > 9)
-	{
-		ft_putnbr_fd(n / 10, fd);
-	}
-	c = n % 10 + '0';
+	if (n / 10)
+		ft_putnbr_fd(n / 10 * flag, fd);
+	c = n % 10 * flag + '0';
 	write(fd, &c, 1);
 }

@@ -12,18 +12,15 @@
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, size_t start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char			*substr;
 	size_t			s_len;
 	size_t			i;
 
-	s_len = 0;
-	i = 0;
-	while (s[s_len])
-		s_len++;
+	s_len = ft_strlen(s);
 	if (start > s_len)
-		return (NULL);
+		len = 0;
 	if (len > s_len - start)
 		len = s_len - start;
 	substr = (char *)malloc(len + 1);
