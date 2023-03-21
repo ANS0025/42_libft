@@ -21,7 +21,7 @@ static int	count_words(char const *s, char c)
 	in_word = 0;
 	while (*s)
 	{
-		if (*s == c)
+		if (*s == c || *s == '\0')
 			in_word = 0;
 		else if (!in_word)
 		{
@@ -39,9 +39,9 @@ static char	*copy_word(char const *s, char c)
 	char			*new_word;
 
 	len = 0;
-	while (s[len] && s[len] != c)
+	while (s[len] && s[len] != c && s[len] != '\0')
 		len++;
-	new_word = (char *) malloc(len + 1);
+	new_word = (char *)malloc(len + 1);
 	if (new_word == NULL)
 		return (NULL);
 	ft_memcpy(new_word, s, len);
@@ -56,7 +56,7 @@ static void	ft_allocate(char **result, char const *s, char c)
 	rp = result;
 	while (*s)
 	{
-		if (*s == c)
+		if (*s == c || *s == '\0')
 			s++;
 		else
 		{
@@ -66,9 +66,10 @@ static void	ft_allocate(char **result, char const *s, char c)
 				while (result != rp)
 					free(*--rp);
 				free(result);
+				return ;
 			}
 			rp++;
-			while (*s && *s != c)
+			while (*s && *s != c && *s != '\0')
 				s++;
 		}
 	}
@@ -77,11 +78,13 @@ static void	ft_allocate(char **result, char const *s, char c)
 
 char	**ft_split(char const *s, char c)
 {
-	int		word_count;
 	char	**result;
+	int		count;
 
-	word_count = count_words(s, c);
-	result = (char **) malloc((word_count + 1) * sizeof(char *));
+	if (s == NULL)
+		return (NULL);
+	count = count_words(s, c);
+	result = (char **)malloc(sizeof(char *) * (count + 1));
 	if (result == NULL)
 		return (NULL);
 	ft_allocate(result, s, c);
