@@ -18,9 +18,7 @@ char	*ft_strrchr(const char *str, int c)
 	while (*str != '\0')
 	{
 		if (*str == (unsigned char)c)
-		{
 			last = (char *)str;
-		}
 		str++;
 	}
 	if (c == '\0')
