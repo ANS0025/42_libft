@@ -66,7 +66,6 @@ static void	ft_allocate(char **result, char const *s, char c)
 				while (result != rp)
 					free(*--rp);
 				free(result);
-				*result = NULL;
 				return ;
 			}
 			rp++;
